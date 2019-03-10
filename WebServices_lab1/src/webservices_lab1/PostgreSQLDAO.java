@@ -16,13 +16,13 @@ public class PostgreSQLDAO {
         StringBuilder condition = new StringBuilder();
         
         if (p.getName()!="" && p.getName()!=null)
-            condition.append("and name='"+p.getName()+"'");
+            condition.append("and name='").append(p.getName()).append("'");
         if (p.getSurname()!="" && p.getSurname()!=null)
-            condition.append("and surname='"+p.getSurname()+"'");
+            condition.append("and surname='").append(p.getSurname()).append("'");
         if (p.getDateOfBirth()!=null)
-            condition.append("and dateOfBirth='"+p.getDateOfBirth().toString()+"'");
+            condition.append("and dateOfBirth='").append(p.getDateOfBirth().toString()).append("'");
         if (p.getSex()=="male" || p.getSex()=="female")
-            condition.append("and sex='"+p.getSex()+"'");
+            condition.append("and sex='").append(p.getSex()).append("'");
         
         if (condition!=null && !condition.toString().equals(""))
         {
