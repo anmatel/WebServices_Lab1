@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package webservices_lab1;
 
-/**
- *
- * @author Анастасия
- */
-public class PersonWebService {
-    
+import java.util.List;
+import javax.jws.WebMethod;
+import javax.jws.WebService; 
+ 
+@WebService(serviceName = "PersonService") 
+public class PersonWebService { 
+ 
+    @WebMethod(operationName = "getPersons")     
+    public List<Person> getPersons(Person p, PostgreSQLDAO dao) {         
+        List<Person> persons = dao.getPersons(p);
+        return persons;
+    }
 }
