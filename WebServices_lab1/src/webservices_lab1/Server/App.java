@@ -1,4 +1,4 @@
-package webservices_lab1;
+package webservices_lab1.Server;
 
 import javax.xml.ws.Endpoint;
 
