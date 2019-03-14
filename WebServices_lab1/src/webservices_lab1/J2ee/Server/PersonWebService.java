@@ -19,7 +19,7 @@ public class PersonWebService {
     @Resource(lookup = "jdbc/wst")
     private DataSource dataSource;
     @WebMethod(operationName = "getPersons")
-    public List<Person> getPersons(Person person) {
+    public List<webservices_lab1.Server.Person> getPersons(Person person) throws SQLException {
         PostgreSQLDAO dao = new PostgreSQLDAO(getConnection());
         return dao.getPersons(person);
     }

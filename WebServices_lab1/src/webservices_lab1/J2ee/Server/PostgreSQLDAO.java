@@ -19,7 +19,7 @@ public class PostgreSQLDAO {
         this.connection = connection;
     }
     
-    public List<webservices_lab1.Server.Person> getPersons(webservices_lab1.Server.Person p) throws SQLException {
+    public List<webservices_lab1.Server.Person> getPersons(webservices_lab1.J2ee.Server.Person p) throws SQLException {
         StringBuilder condition = new StringBuilder();
         
         if (p.getName()!="" && p.getName()!=null)
