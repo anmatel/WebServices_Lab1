@@ -56,7 +56,7 @@ public class WebServiceClient {
         }
     }
 
-    private static void getPerson(Scanner in) throws ParseException {
+    private static void getPerson(Scanner in) throws ParseException, DatatypeConfigurationException {
         Person inputPerson = inputPersonsData(in);
         
         List<Person> persons = personService.getPersonWebServicePort().getPersons(inputPerson, new PostgreSQLDAO());
@@ -69,7 +69,7 @@ public class WebServiceClient {
         System.out.println("Total persons: " + persons.size());
     }
 
-    private static void createPerson(Scanner in) throws ParseException {
+    private static void createPerson(Scanner in) throws ParseException, DatatypeConfigurationException {
         Person inputPerson = inputPersonsData(in);
         
         Integer id = personService.getPersonWebServicePort().createPerson(inputPerson, new PostgreSQLDAO());
@@ -77,7 +77,7 @@ public class WebServiceClient {
         System.out.println("Person was created with id: " + id);
     }
     
-    private static void updatePerson(Scanner in) throws ParseException{
+    private static void updatePerson(Scanner in) throws ParseException, DatatypeConfigurationException{
         System.out.println("Input person's id...");
         Integer id = in.nextInt();
         
@@ -97,7 +97,7 @@ public class WebServiceClient {
         System.out.println(response);
     }
     
-    private static Person inputPersonsData(Scanner in) throws ParseException{
+    private static Person inputPersonsData(Scanner in) throws ParseException, DatatypeConfigurationException{
         Person inputPerson = new Person();
         
         System.out.println("Input person's data...");
