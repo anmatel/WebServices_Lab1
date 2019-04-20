@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PostgreSQLDAO {
-    public List<Person> getPersonsByName(String inputName, String inputSurname, Date inputDate, String inputSex) {
+    public List<Person> getPersons(String inputName, String inputSurname, Date inputDate, String inputSex) {
         StringBuilder condition = new StringBuilder();
         
         if (!inputName.isEmpty() && inputName!= null)

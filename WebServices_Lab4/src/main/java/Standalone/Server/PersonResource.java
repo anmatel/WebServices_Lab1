@@ -14,7 +14,7 @@ public class PersonResource {
             @QueryParam("name") String surname,
             @QueryParam("name") Date dateOfBirth,
             @QueryParam("name") String sex) {
-        List<Person> persons = new PostgreSQLDAO().getPersonsByName(name, surname, dateOfBirth, sex);
+        List<Person> persons = new PostgreSQLDAO().getPersons(name, surname, dateOfBirth, sex);
         return persons;
     }
 }
