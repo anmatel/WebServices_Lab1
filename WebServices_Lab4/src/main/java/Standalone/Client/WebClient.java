@@ -37,36 +37,39 @@ public class WebClient {
     private static void inputPersonsDataFromConsole(Person p) throws DatatypeConfigurationException, ParseException {
         Scanner in = new Scanner(System.in);
 
-        System.out.print("Input fields for search (name, surname, date of birth (dd-MM-yyyy), sex) separated by spaces: ");
-        String params = in.nextLine();
-
-        for (String param : params.split(" ")) {
-            System.out.print("Input " + param + ": ");
-            try {
-                switch (param) {
-                    case ("name"):
-                        p.setName(in.nextLine());
-                        break;
-                    case ("surname"):
-                        p.setSurname(in.nextLine());
-                        break;
-                    case ("date of birth"):
-                        SimpleDateFormat sdfo = new SimpleDateFormat("yyyy-MM-dd");
-                        p.setDateOfBirth(sdfo.parse(in.nextLine()));
-                        break;
-                    case ("sex"):
-                        p.setSex(in.nextLine());
-                        break;
-                }
-            } catch (ParseException ex) {
-                Logger.getLogger(WebClient.class.getName()).log(Level.SEVERE, "Wrong format of date", ex);
-            } catch (InputMismatchException ex) {
-                Logger.getLogger(WebClient.class.getName()).log(Level.SEVERE, "Wrong number input value", ex);
+        String value;
+        try {
+            System.out.print("input name: ");
+            value = in.nextLine();
+            if (!value.isEmpty()) {
+                p.setName(value);
             }
+            System.out.print("input suname: ");
+            value = in.nextLine();
+            if (!value.isEmpty()) {
+                p.setSurname(value);
+            }
+            System.out.print("input date of birth (yyyy-MM-dd): ");
+            value = in.nextLine();
+            if (!value.isEmpty()) {
+                SimpleDateFormat sdfo = new SimpleDateFormat("yyyy-MM-dd");
+                p.setDateOfBirth(sdfo.parse(value));
+            }
+            System.out.print("input sex (male/female): ");
+            value = in.nextLine();
+            if (!value.isEmpty()) {
+                p.setSex(value);
+            }
+            System.out.print("Your query is " + p.toString());
+        } catch (ParseException ex) {
+            Logger.getLogger(WebClient.class.getName()).log(Level.SEVERE, "Wrong format of date", ex);
+        } catch (InputMismatchException ex) {
+            Logger.getLogger(WebClient.class.getName()).log(Level.SEVERE, "Wrong number input value", ex);
         }
     }
 
-    private static List<Person> getAllPersons(Client client, Person p) {
+
+private static List<Person> getAllPersons(Client client, Person p) {
         WebResource webResource = client.resource(URL);
         
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -76,8 +79,11 @@ public class WebClient {
             webResource = webResource.queryParam("surname", p.getSurname());
             webResource = webResource.queryParam("dateOfBirth", df.format(p.getDateOfBirth()));
             webResource = webResource.queryParam("sex", p.getSex());
-        }
-        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+        
+
+}
+        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class
+);
         if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
             throw new IllegalStateException("Request failed");
         }
