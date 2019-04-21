@@ -18,7 +18,7 @@ public class PostgreSQLDAO {
         this.connection = connection;
     }
 
-    public List<Standalone.Server.Person> getPersons(String inputName, String inputSurname, Date inputDate, String inputSex) {
+    public List<Person> getPersons(String inputName, String inputSurname, Date inputDate, String inputSex) {
         StringBuilder condition = new StringBuilder();
 
         if (!inputName.isEmpty() && inputName != null) {
@@ -39,7 +39,7 @@ public class PostgreSQLDAO {
             condition.insert(0, " where ");
         }
 
-        List<Standalone.Server.Person> persons = new ArrayList<>();
+        List<Person> persons = new ArrayList<>();
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("select * from persons".concat(condition.toString()).concat(";"));
@@ -49,7 +49,7 @@ public class PostgreSQLDAO {
                 String surname = rs.getString("surname");
                 Date dateOfBirth = rs.getDate("date_of_birth");
                 String sex = rs.getString("sex");
-                Standalone.Server.Person person = new Standalone.Server.Person(name, surname, dateOfBirth, sex);
+                Person person = new Person(name, surname, dateOfBirth, sex);
                 persons.add(person);
             }
         } catch (SQLException ex) {
