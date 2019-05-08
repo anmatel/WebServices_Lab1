@@ -4,8 +4,7 @@ import java.util.Date;
 import java.util.List;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import webservices_lab6.Errors.IllegalEnteredDataException;
-import webservices_lab6.Errors.IllegalPersonSexValueException;
+import webservices_lab6.Errors.*;
 
 @Path("/persons")
 @Produces({MediaType.APPLICATION_JSON})
