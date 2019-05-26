@@ -27,10 +27,18 @@ public class WebServiceClient {
 
         Scanner in = new Scanner(System.in);
         while (true) {
-            System.out.println("Select the type of action: 1 - select, 2 - insert, 3 - update, 4 - delete, 5 - quit");
+            System.out.println("Select the type of action: 0 - send binary data, 1 - select, 2 - insert, 3 - update, 4 - delete, 5 - quit");
             String actionType = in.nextLine();
             try {
                 switch (actionType) {
+                    case "0":
+                        String bin = in.nextLine().trim();
+                        if (!bin.isEmpty() || bin != null)
+                        {
+                            byte[] binaryData = bin.getBytes();
+                            personService.getPersonWebServicePort().sendBinaryData(binaryData);
+                        }
+                        break;
                     case "1":
                         getPerson(in);
                         break;

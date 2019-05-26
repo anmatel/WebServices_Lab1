@@ -7,6 +7,13 @@ import javax.jws.WebService;
 @WebService(serviceName = "PersonService") 
 public class PersonWebService { 
  
+    @WebMethod(operationName = "sendBinaryData")
+    public String sendBinaryData(byte[] binaryData){
+        for( int i = 0; i < binaryData.length; i++ ) 
+            System.out.format( "%02X", binaryData[i] );
+        return new String("Recieved binary data.");
+    }
+    
     @WebMethod(operationName = "getPersons")     
     public List<Person> getPersons(Person p, PostgreSQLDAO dao) {         
         List<Person> persons = dao.getPersons(p);

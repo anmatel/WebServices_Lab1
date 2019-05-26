@@ -16,17 +16,23 @@
 <message name="createPersonResponse">
 <part name="parameters" element="tns:createPersonResponse"></part>
 </message>
-<message name="deletePerson">
-<part name="parameters" element="tns:deletePerson"></part>
-</message>
-<message name="deletePersonResponse">
-<part name="parameters" element="tns:deletePersonResponse"></part>
-</message>
 <message name="updatePerson">
 <part name="parameters" element="tns:updatePerson"></part>
 </message>
 <message name="updatePersonResponse">
 <part name="parameters" element="tns:updatePersonResponse"></part>
+</message>
+<message name="sendBinaryData">
+<part name="parameters" element="tns:sendBinaryData"></part>
+</message>
+<message name="sendBinaryDataResponse">
+<part name="parameters" element="tns:sendBinaryDataResponse"></part>
+</message>
+<message name="deletePerson">
+<part name="parameters" element="tns:deletePerson"></part>
+</message>
+<message name="deletePersonResponse">
+<part name="parameters" element="tns:deletePersonResponse"></part>
 </message>
 <portType name="PersonWebService">
 <operation name="getPersons">
@@ -37,13 +43,17 @@
 <input wsam:Action="http://Server.webservices_lab2/PersonWebService/createPersonRequest" message="tns:createPerson"></input>
 <output wsam:Action="http://Server.webservices_lab2/PersonWebService/createPersonResponse" message="tns:createPersonResponse"></output>
 </operation>
-<operation name="deletePerson">
-<input wsam:Action="http://Server.webservices_lab2/PersonWebService/deletePersonRequest" message="tns:deletePerson"></input>
-<output wsam:Action="http://Server.webservices_lab2/PersonWebService/deletePersonResponse" message="tns:deletePersonResponse"></output>
-</operation>
 <operation name="updatePerson">
 <input wsam:Action="http://Server.webservices_lab2/PersonWebService/updatePersonRequest" message="tns:updatePerson"></input>
 <output wsam:Action="http://Server.webservices_lab2/PersonWebService/updatePersonResponse" message="tns:updatePersonResponse"></output>
+</operation>
+<operation name="sendBinaryData">
+<input wsam:Action="http://Server.webservices_lab2/PersonWebService/sendBinaryDataRequest" message="tns:sendBinaryData"></input>
+<output wsam:Action="http://Server.webservices_lab2/PersonWebService/sendBinaryDataResponse" message="tns:sendBinaryDataResponse"></output>
+</operation>
+<operation name="deletePerson">
+<input wsam:Action="http://Server.webservices_lab2/PersonWebService/deletePersonRequest" message="tns:deletePerson"></input>
+<output wsam:Action="http://Server.webservices_lab2/PersonWebService/deletePersonResponse" message="tns:deletePersonResponse"></output>
 </operation>
 </portType>
 <binding name="PersonWebServicePortBinding" type="tns:PersonWebService">
@@ -66,7 +76,7 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="deletePerson">
+<operation name="updatePerson">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
@@ -75,7 +85,16 @@
 <soap:body use="literal"></soap:body>
 </output>
 </operation>
-<operation name="updatePerson">
+<operation name="sendBinaryData">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal"></soap:body>
+</input>
+<output>
+<soap:body use="literal"></soap:body>
+</output>
+</operation>
+<operation name="deletePerson">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal"></soap:body>
