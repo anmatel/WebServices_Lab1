@@ -26,6 +26,7 @@ public class WebClient {
     private static final String URL = "http://localhost:1111/rest/persons";
     public final static String LOGIN = "sa";
     public final static String PASSWORD = "12345";
+    private static String authInfo = "";
 
     public static void main(String[] args) throws DatatypeConfigurationException, ParseException {
         Client client = Client.create();
@@ -36,6 +37,10 @@ public class WebClient {
         while (true) {
             System.out.println("Select the type of action: 1 - select, 2 - insert, 3 - update, 4 - delete, 5 - quit");
             String actionType = in.nextLine();
+            System.out.println("Enter username: ");
+            authInfo += in.nextLine() + ":";
+            System.out.println("Enter password: ");
+            authInfo += in.nextLine();
             try {
                 switch (actionType) {
                     case "1":
@@ -95,7 +100,7 @@ public class WebClient {
             if (!value.isEmpty()) {
                 p.setSex(value);
             }
-            System.out.print("Your query is "+p.toString());
+            System.out.print("Your query is " + p.toString());
         } catch (ParseException ex) {
             Logger.getLogger(WebClient.class.getName()).log(Level.SEVERE, "Wrong format of date", ex);
         } catch (InputMismatchException ex) {
@@ -115,7 +120,7 @@ public class WebClient {
             webResource = webResource.queryParam("sex", p.getSex());
 
         }
-        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class
+        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).header("Authorization", "Basic " + authInfo).get(ClientResponse.class
         );
         if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
             throw new IllegalStateException("Request failed");
@@ -144,7 +149,7 @@ public class WebClient {
 
         }
 
-        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).post(ClientResponse.class
+        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).header("Authorization", "Basic " + authInfo).post(ClientResponse.class
         );
         if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
             throw new IllegalStateException("Request failed");
@@ -168,7 +173,7 @@ public class WebClient {
 
         }
 
-        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).post(ClientResponse.class
+        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).header("Authorization", "Basic " + authInfo).post(ClientResponse.class
         );
         if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
             throw new IllegalStateException("Request failed");
@@ -187,12 +192,21 @@ public class WebClient {
 
         }
 
-        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).delete(ClientResponse.class
+        ClientResponse response = webResource.accept(MediaType.APPLICATION_JSON).header("Authorization", "Basic " + authInfo).delete(ClientResponse.class
         );
         if (response.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
             throw new IllegalStateException("Request failed");
         }
 
         return response.getStatusInfo();
+    }
+    
+    private static ClientResponse gettingRequestStatus(WebResource webResource) {
+        
+        ClientResponse response
+                = webResource.accept(MediaType.APPLICATION_JSON)
+                        .header("Authorization","Basic " + authInfo).get(ClientResponse.class);
+        
+        return response;
     }
 }
